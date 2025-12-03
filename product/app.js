@@ -8,12 +8,14 @@ const router = require("./routes");
 
 const app = express();
 
-app.use("/api", router);
+app.use(express.json());
+app.use("/", router);
 
 app.listen(port, async (err) => {
     if (err) {
         console.log("ERROR RUNNING SERVER");
         console.error(err);
+        return;
     }
     
     try{

@@ -20,12 +20,26 @@ const addProduct = async (req, res) => {
         res.json(data);
     }
     catch(e){
-        console.log(e);
+        console.log(e.message);
+        res.send("server error");
+    }
+};
+
+const productExists = async (req, res) => {
+    try{
+        const { _id } = req.params;
+        const productExists = await Product.exists({_id});
+        console.log(productExists);
+        res.json(productExists);
+    }
+    catch(e){
+        console.log(e.message);
         res.send("server error");
     }
 };
 
 module.exports = {
     getAllProducts,
-    addProduct
+    addProduct,
+    productExists
 }
