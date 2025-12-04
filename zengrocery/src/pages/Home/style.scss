@@ -1,0 +1,22 @@
+.home{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+
+    .content{
+        color: #f4f4f4;
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+
+    }
+
+}
+
+.loader{
+    border-color: #1e90ff;
+    border-right-color: transparent;
+    background-color: transparent;
+}

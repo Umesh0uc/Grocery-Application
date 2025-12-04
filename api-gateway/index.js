@@ -5,20 +5,23 @@ const express = require('express');
 const port = process.env.PORT || "5000";
 const app = express();
 
+const productServiceUrl = process.env.PRODUCT_SERVICE_URL; 
+const cartServiceUrl = process.env.CART_SERVICE_URL; 
+
 app.use(morgan('combined'));
 
-app.use('/api', createProxyMiddleware({
-    target: process.env.PRODUCT_SERVICE_URL,
+app.use('/api/products', createProxyMiddleware({
+    target: productServiceUrl,
     changeOrigin: true,
     pathRewrite: {
-        '^/api': ''
+        '^/api/products': '/products'
     }
 }));
-app.use('/api', createProxyMiddleware({
-    target: process.env.CARD_SERVICE_URL,
+app.use('/api/cart', createProxyMiddleware({
+    target: cartServiceUrl,
     changeOrigin: true,
     pathRewrite: {
-        '^/api': ''
+        '^/api/cart': ''
     }
 }));
 

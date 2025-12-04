@@ -2,8 +2,8 @@ const { getAllproductsInCart, addProductInCart, deleteProductFromCart } = requir
 
 const router = require('express').Router();
 
-router.get("/cart", getAllproductsInCart);
-router.post("/cart", addProductInCart);
-router.delete("/cart/:productId", deleteProductFromCart);
+router.get("/", getAllproductsInCart);
+router.post("/", addProductInCart);
+router.delete("/:productId", deleteProductFromCart);
 
 module.exports = router;

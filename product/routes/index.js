@@ -2,8 +2,8 @@ const { getAllProducts, addProduct, productExists } = require('../controllers/pr
 
 const router = require('express').Router();
 
-router.get("/products", getAllProducts);
-router.get("/products/exists/:_id", productExists);
-router.get("/products/:name/:price/:category/:imageUrl", addProduct);
+router.get("/", getAllProducts);
+router.get("/exists/:_id", productExists);
+router.post("/", addProduct);
 
 module.exports = router;
