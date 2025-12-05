@@ -1,12 +1,14 @@
-import 'bootstrap/scss/bootstrap.scss';
+import 'bootstrap/dist/css/bootstrap.css';
+import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import './App.scss';
 import Layout from './pages/Layout/Layout';
+import Header from './components/Header/Header';
 
 function App() {
 
     return (
         <div className='app'>
-            <h1>ZenGrocery</h1>
+            <Header/>
             <Layout/>
         </div>
     )

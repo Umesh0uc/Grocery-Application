@@ -1,13 +1,14 @@
 const Product = require("../models/Product");
+const { createJsonResponse } = require("../utils/responseUtils");
 
 const getAllProducts = async (req, res) => {
     try{
-        const products = await Product.find({}, {_id: false, _v: 0});
-        res.json(products);
+        const products = await Product.find({}, {_v: 0});
+        res.json(createJsonResponse(true, products));
     }
     catch(e){
         console.error(e?.message);
-        res.send(e?.message);
+        res.json(createJsonResponse(false, null, e?.message));
     }
 };
 

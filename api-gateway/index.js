@@ -1,6 +1,7 @@
 require('dotenv').config({quiet: true});
 const morgan = require('morgan');
 const { createProxyMiddleware } = require('http-proxy-middleware');
+const cors = require('cors');
 const express = require('express');
 const port = process.env.PORT || "5000";
 const app = express();
@@ -9,6 +10,11 @@ const productServiceUrl = process.env.PRODUCT_SERVICE_URL;
 const cartServiceUrl = process.env.CART_SERVICE_URL; 
 
 app.use(morgan('combined'));
+
+const corsOptions = {
+    origin: ['http://localhost:5173'],
+};
+app.use(cors(corsOptions));
 
 app.use('/api/products', createProxyMiddleware({
     target: productServiceUrl,
