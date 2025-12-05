@@ -18,7 +18,7 @@ function Header(){
     return (
         <nav className="header navbar navbar-expand-sm">
             <div className="container-fluid">
-                <p className="navbar-brand h1">ZenGrocery</p>
+                <p className="h1">ZenGrocery</p>
                 <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
                 </button>

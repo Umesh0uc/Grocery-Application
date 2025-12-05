@@ -1,5 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
+import 'bootstrap-icons/font/bootstrap-icons.scss';
 import './App.scss';
 import Layout from './pages/Layout/Layout';
 import Header from './components/Header/Header';

@@ -13,6 +13,8 @@ const cartSchema = new mongoose.Schema({
         max: [10, "Cart cannot accept more than 10 items"],
         required: true
     }
+},{
+    versionKey: false,
 });
 
 const Cart = mongoose.model("carts", cartSchema);

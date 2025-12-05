@@ -4,7 +4,8 @@ const productServiceUrl = process.env.PRODUCT_SERVICE_URL + "/products/exists/";
 
 const getAllproductsInCart = async (req, res) => {
     try{
-        res.json([]);
+        const cartData = await Cart.find({});
+        res.json(cartData);
     }
     catch(e){
         console.error(e);
