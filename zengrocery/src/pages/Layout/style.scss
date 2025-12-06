@@ -3,5 +3,12 @@
     margin: 0px auto;
     max-height: 90vh;
     border-radius: 6px;
-    padding: 70px 20px;
+    padding: 80px 20px;
+}
+
+.toast-container{
+    position: fixed;
+    bottom: 10px;
+    left: 10px;
+    width: 100%;
 }
