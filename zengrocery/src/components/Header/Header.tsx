@@ -3,11 +3,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import './style.scss';
 import type { RootState } from '../../redux/store';
 import { setPage, type appState } from '../../redux/appReducer';
+import type { CartState } from '../../redux/cartReducer';
 
 function Header(){
 
     const dispatch = useDispatch();
     const { page } = useSelector<RootState, appState>(state => state.app);
+    const { count } = useSelector<RootState, CartState>(state => state.cart);
 
     const handleClick = (e: MouseEvent<HTMLButtonElement>): void => {
         e.preventDefault();
@@ -25,7 +27,7 @@ function Header(){
                 <div className="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
                     <div className="navbar-nav">
                         <button className={`nav-link ${page === "home" && "active"}`} value={"home"} onClick={handleClick}>Home</button>
-                        <button className={`nav-link ${page === "cart" && "active"}`} value={"cart"} onClick={handleClick}>Cart</button>
+                        <button className={`nav-link ${page === "cart" && "active"}`} value={"cart"} onClick={handleClick}>Cart {count}</button>
                     </div>
                 </div>
             </div>

@@ -3,11 +3,15 @@ import { getAllProducts } from '../../services/productService';
 import type { Product } from '../../utils/commonTypes';
 import ProductCard from '../../components/ProductCard/ProductCards';
 import './style.scss';
+import { useSelector } from 'react-redux';
+import type { RootState } from '../../redux/store';
+import type { CartState } from '../../redux/cartReducer';
 
 function Home(){
     const [loading, setLoading] = useState(true);
     const [data, setData] = useState([]);
     const [filter, setFilter] = useState("All");
+    const { items } = useSelector<RootState, CartState>(state => state.cart);
     const filterOptions = ["All", "Fruits", "Vegetables", "Dairy", "Snacks"];
 
     const fetchProducts = async () => {
@@ -26,7 +30,6 @@ function Home(){
         fetchProducts();
     }, []);
 
-    console.log(data);
 
     return (
         <div className="home">
@@ -39,11 +42,11 @@ function Home(){
                             onChange={handleFilterChange}
                         >
                             {
-                                filterOptions.map(item => <option value={item}>{item}</option>)
+                                filterOptions.map(item => <option key={item} value={item}>{item}</option>)
                             }
                         </select>
                     </div>
-                    {data.map((item: Product) => <ProductCard item={item} />)}    
+                    {data.map((item: Product) => <ProductCard key={item._id} item={item} items={items} />)}    
             </div> 
         </div>
     );

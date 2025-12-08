@@ -27,7 +27,7 @@ const addProductInCart = async (req, res) => {
         if(isProductFound.data._id){
             const newCart = new Cart({productId, quantity});
             const productAdded = await newCart.save();
-            res.send("Added to cart succssfully");
+            res.send("Added to cart successfully");
             return;
         }
         else{

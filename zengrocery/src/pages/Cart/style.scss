@@ -8,5 +8,21 @@
         border-radius: 5px;
         padding: 5px 10px;
         margin-bottom: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        .cart-item-content{
+            flex: 1;
+            .item-price{
+                margin: 0;
+                font-size: 12px;
+            }
+        }
+        .delete-cart-item{
+            all: unset;
+            color: #fa0000;
+        }
+        
     }
 }

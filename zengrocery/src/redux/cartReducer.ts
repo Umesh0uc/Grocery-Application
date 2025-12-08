@@ -26,8 +26,9 @@ const cartReducer = createSlice({
         addToCart: (state, action) => {
             if(state.count < 10){
                 cleanEmptyState(state.items);
-                action.payload.quantity = 1;
-                state.items[action.payload._id] = action.payload;
+                const newProduct:Product = {...action.payload};
+                newProduct.quantity = 1;
+                state.items[newProduct._id] = newProduct;
                 state.count+=1;
             }
         },

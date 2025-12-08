@@ -1,31 +1,30 @@
-import { useState } from "react";
 import type { Product } from "../../utils/commonTypes";
 import './style.scss';
 import { useDispatch } from "react-redux";
 import { toast } from "../../redux/toastReducer";
 import { addToCart, removeCartItem } from "../../redux/cartReducer";
 
-function ProductCard({item}:{item:Product}){
+function ProductCard({item, items}:{item:Product, items:Record<string, Product>}){
 
     const dispatch = useDispatch();
-    const [clicked, setClicked] = useState(false);
 
     const addProductToCart = (product: Product) => {
-        dispatch(addToCart(product));
+        const newProduct:Product = {...product};
+        newProduct.quantity = 1;
+        dispatch(addToCart(newProduct));
     };
     const removeFromCart = (id: string) => {
         dispatch(removeCartItem(id));
     };
 
     const handleClick = (): void => {
-        if(!clicked){
+        if(!Object.hasOwn(items, item._id)){
             dispatch(toast(`${item.name} has been added to cart.`));
             addProductToCart(item);
         }
         else{
             removeFromCart(item._id);
         }
-        setClicked(prev => !prev);
     };
 
     return (
@@ -40,7 +39,7 @@ function ProductCard({item}:{item:Product}){
                         <p className='card-text'>{item.price}</p>
                     </div>
                     <button className='icon-button col-3 p-0 m-auto' onClick={handleClick}>
-                        {clicked ? <i className="bi bi-check-circle-fill"></i> : <i className="bi bi-plus-circle"></i>}
+                        {Object.hasOwn(items, item._id) ? <i className="bi bi-check-circle-fill"></i> : <i className="bi bi-plus-circle"></i>}
                     </button>
                 </div>
             </div>
