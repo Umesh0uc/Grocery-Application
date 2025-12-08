@@ -3,18 +3,28 @@ import type { Product } from "../../utils/commonTypes";
 import './style.scss';
 import { useDispatch } from "react-redux";
 import { toast } from "../../redux/toastReducer";
+import { addToCart, removeCartItem } from "../../redux/cartReducer";
 
 function ProductCard({item}:{item:Product}){
 
     const dispatch = useDispatch();
     const [clicked, setClicked] = useState(false);
 
-    const addToCart = (product: Product) => {
-
+    const addProductToCart = (product: Product) => {
+        dispatch(addToCart(product));
+    };
+    const removeFromCart = (id: string) => {
+        dispatch(removeCartItem(id));
     };
 
     const handleClick = (): void => {
-        !clicked && dispatch(toast(item.name + " has been added to cart."));
+        if(!clicked){
+            dispatch(toast(`${item.name} has been added to cart.`));
+            addProductToCart(item);
+        }
+        else{
+            removeFromCart(item._id);
+        }
         setClicked(prev => !prev);
     };
 

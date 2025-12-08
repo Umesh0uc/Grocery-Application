@@ -1,0 +1,12 @@
+.cart{
+    max-width: 900px;
+    margin: 0px auto;
+    border: 1px solid green;
+    padding: 10px 20px;
+    .cart-item{
+        background-color: whitesmoke;
+        border-radius: 5px;
+        padding: 5px 10px;
+        margin-bottom: 10px;
+    }
+}

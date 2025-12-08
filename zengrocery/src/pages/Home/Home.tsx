@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, type ChangeEvent } from 'react';
 import { getAllProducts } from '../../services/productService';
 import type { Product } from '../../utils/commonTypes';
 import ProductCard from '../../components/ProductCard/ProductCards';
@@ -7,6 +7,8 @@ import './style.scss';
 function Home(){
     const [loading, setLoading] = useState(true);
     const [data, setData] = useState([]);
+    const [filter, setFilter] = useState("All");
+    const filterOptions = ["All", "Fruits", "Vegetables", "Dairy", "Snacks"];
 
     const fetchProducts = async () => {
         const productsData = await getAllProducts();
@@ -15,6 +17,10 @@ function Home(){
             setLoading(false);
         }
     }
+
+    const handleFilterChange = (e: ChangeEvent<HTMLSelectElement>) => {
+        setFilter(e.target.value);
+    };
 
     useEffect(() => {
         fetchProducts();
@@ -26,6 +32,17 @@ function Home(){
         <div className="home">
             <div className={`spinner-border loader ${!data.length && loading ? 'd-block' : 'd-none'}`}></div> 
             <div className={`content row row-gap-3  ${!data.length && loading ? 'd-none' : ''}`}>
+                    <div className='filter-container'>
+                        <i className="bi bi-funnel mx-2"></i>
+                        <select
+                            value={filter}
+                            onChange={handleFilterChange}
+                        >
+                            {
+                                filterOptions.map(item => <option value={item}>{item}</option>)
+                            }
+                        </select>
+                    </div>
                     {data.map((item: Product) => <ProductCard item={item} />)}    
             </div> 
         </div>

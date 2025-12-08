@@ -13,7 +13,6 @@ const appReducer = createSlice({
     initialState: initAppState,
     reducers: {
         setPage: (state, action) => {
-            console.log("data >>>", action);
             state.page = action.payload;
         },
     },
