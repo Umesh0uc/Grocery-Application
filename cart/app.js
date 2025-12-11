@@ -5,9 +5,11 @@ const mongoUrl = process.env.MONGO_URL;
 const mongoose = require('mongoose');
 const express = require("express");
 const router = require("./routes");
+const morgan = require("morgan");
 
 const app = express();
 
+app.use(morgan("combined"));
 app.use(express.json());
 
 app.use("/", router);

@@ -1,30 +1,14 @@
 import type { Product } from "../../utils/commonTypes";
 import './style.scss';
 import { useDispatch } from "react-redux";
-import { toast } from "../../redux/toastReducer";
-import { addToCart, removeCartItem } from "../../redux/cartReducer";
+import { saveToCart } from "../../redux/cartReducer";
 
-function ProductCard({item, items}:{item:Product, items:Record<string, Product>}){
+function ProductCard({item, items}:{item:Product, items:Product[]}){
 
-    const dispatch = useDispatch();
-
-    const addProductToCart = (product: Product) => {
-        const newProduct:Product = {...product};
-        newProduct.quantity = 1;
-        dispatch(addToCart(newProduct));
-    };
-    const removeFromCart = (id: string) => {
-        dispatch(removeCartItem(id));
-    };
-
-    const handleClick = (): void => {
-        if(!Object.hasOwn(items, item._id)){
-            dispatch(toast(`${item.name} has been added to cart.`));
-            addProductToCart(item);
-        }
-        else{
-            removeFromCart(item._id);
-        }
+    const dispatch = useDispatch<any>();
+    
+    const handleClick = async (): Promise<void> => {
+        dispatch(saveToCart({_id: item._id,quantity: 1,dispatch}));
     };
 
     return (
@@ -39,7 +23,7 @@ function ProductCard({item, items}:{item:Product, items:Record<string, Product>}
                         <p className='card-text'>{item.price}</p>
                     </div>
                     <button className='icon-button col-3 p-0 m-auto' onClick={handleClick}>
-                        {Object.hasOwn(items, item._id) ? <i className="bi bi-check-circle-fill"></i> : <i className="bi bi-plus-circle"></i>}
+                        {items.length && items.find(product => product._id === item._id) ? <i className="bi bi-check-circle-fill"></i> : <i className="bi bi-plus-circle"></i>}
                     </button>
                 </div>
             </div>

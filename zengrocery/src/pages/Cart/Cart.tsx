@@ -1,22 +1,31 @@
 import { useDispatch, useSelector } from "react-redux";
-import { removeCartItem, type CartState } from "../../redux/cartReducer";
+import { fetchCartItems, type CartState } from "../../redux/cartReducer";
 import type { RootState } from "../../redux/store";
 import "./style.scss";
 import type { Product } from "../../utils/commonTypes";
+import { useEffect } from "react";
+import SpinLoader from "../../components/SpinLoader/SpinLoader";
 
 function Cart(){
 
-    const dispatch = useDispatch();
-    const { items, count } = useSelector<RootState, CartState>(state => state.cart);
+    const dispatch = useDispatch<any>();
+    const { items, count, status } = useSelector<RootState, CartState>(state => state.cart);
+
+    useEffect(() => {
+        dispatch(fetchCartItems());
+    }, []);
 
     const handleDeleteCartItem = (item: Product) => {
-        dispatch(removeCartItem(item._id));
+        // dispatch(removeCartItem(item._id));
     };
 
     if(!count){
         return (
             <p style={{color: "white", textAlign: "center", marginTop: "30px"}}>No items in your cart!</p>
         );
+    }
+    if(['idle', 'loading'].includes(status)){
+        return <SpinLoader show={true}/>;
     }
     return (
         <div className="cart">

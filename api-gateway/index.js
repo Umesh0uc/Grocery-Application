@@ -20,16 +20,17 @@ app.use('/api/products', createProxyMiddleware({
     target: productServiceUrl,
     changeOrigin: true,
     pathRewrite: {
-        '^/api/products': '/products'
+        '^/api/products': '/'
     }
 }));
 app.use('/api/cart', createProxyMiddleware({
     target: cartServiceUrl,
     changeOrigin: true,
     pathRewrite: {
-        '^/api/cart': ''
+        '^/api/cart': '/'
     }
 }));
+app.use(express.json());
 
 app.listen(port, (err) => {
     if(err){

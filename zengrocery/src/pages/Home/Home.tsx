@@ -6,6 +6,7 @@ import './style.scss';
 import { useSelector } from 'react-redux';
 import type { RootState } from '../../redux/store';
 import type { CartState } from '../../redux/cartReducer';
+import SpinLoader from '../../components/SpinLoader/SpinLoader';
 
 function Home(){
     const [loading, setLoading] = useState(true);
@@ -33,7 +34,7 @@ function Home(){
 
     return (
         <div className="home">
-            <div className={`spinner-border loader ${!data.length && loading ? 'd-block' : 'd-none'}`}></div> 
+            <SpinLoader show={!data.length && loading} />
             <div className={`content row row-gap-3  ${!data.length && loading ? 'd-none' : ''}`}>
                     <div className='filter-container'>
                         <i className="bi bi-funnel mx-2"></i>
@@ -46,7 +47,7 @@ function Home(){
                             }
                         </select>
                     </div>
-                    {data.map((item: Product) => <ProductCard key={item._id} item={item} items={items} />)}    
+                    {data.filter((item: Product) => {return filter === "All" || item.category === filter}).map((item: Product) => <ProductCard key={item._id} item={item} items={items} />)}    
             </div> 
         </div>
     );

@@ -1,33 +1,58 @@
 const Cart = require("../models/Cart");
 const axios = require("axios");
-const productServiceUrl = process.env.PRODUCT_SERVICE_URL + "/products/exists/";
+const productServiceUrl = process.env.PRODUCT_SERVICE_URL + "/exists/";
 
 const getAllproductsInCart = async (req, res) => {
     try{
-        const cartData = await Cart.find({});
-        res.json(cartData);
+        const cartData = await Cart.aggregate([
+            {
+                $lookup: {
+                    from: 'products',
+                    foreignField: '_id',
+                    localField: 'productId',
+                    as: 'product'
+                }
+            },
+            {
+                $unwind: '$product'
+            },
+            {
+                $project: {
+                    product: {
+                        $mergeObjects: ['$$ROOT', '$product']
+                    }
+                }
+            },
+            {
+                $replaceWith: '$product'
+            },
+            {
+                $unset: ['product', 'productId']
+            }
+        ]);
+        res.json({success: true, data: cartData, error: null});
     }
     catch(e){
         console.error(e);
-        res.json({succss: false});
+        res.json({success: false, data: null, error: e.message});
     }
 };
 
 const addProductInCart = async (req, res) => {
     try{
-        const {productId, quantity} = req.body;
+        const {_id: productId, quantity} = req.body;
         const existingCart = await Cart.findOne({productId: productId});
         if(existingCart){
             existingCart.quantity = quantity;
-            await existingCart.save();
-            res.json("Quantity updated");
+            const updatedItem = await existingCart.save();
+            res.json({success: true, data: updatedItem, error: null});
             return;
         }
         const isProductFound = await axios.get(productServiceUrl + productId);
         if(isProductFound.data._id){
             const newCart = new Cart({productId, quantity});
             const productAdded = await newCart.save();
-            res.send("Added to cart successfully");
+            res.json({success: true, data: productAdded, error: null});
             return;
         }
         else{
@@ -35,7 +60,7 @@ const addProductInCart = async (req, res) => {
         }
     }
     catch(e){
-        res.json({succss: false, error: e.message});
+        res.json({success: false, data: null, error: e.message});
     }
 };
 
@@ -51,7 +76,7 @@ const deleteProductFromCart = async (req, res) => {
     }
     catch(e){
         console.error(e);
-        res.json({succss: false});
+        res.json({success: false});
     }
 };
 
