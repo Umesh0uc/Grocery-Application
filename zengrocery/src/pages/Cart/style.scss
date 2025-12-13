@@ -17,11 +17,51 @@
                 margin: 0;
                 font-size: 12px;
             }
-        }
-        .delete-cart-item{
-            all: unset;
-            color: #fa0000;
+            .btn-group{
+                border: 1px solid grey;
+                button:nth-child(1){
+                    border-right: 1px solid grey;
+                }
+                button:nth-child(3){
+                    border-left: 1px solid grey;
+                }
+            }
         }
         
+        
+    }
+
+    .cart-table{
+        width: 100%;
+        margin-bottom: 50px;
+        color: #ffffff;
+        thead{
+            tr{
+                color: black;
+                background-color: #ffffff;
+            }
+        }
+        tr{
+            background-color: #272525;
+            border: 1px solid #3a3838;
+            td, th{
+                padding: 5px;
+            }
+            .delete-cart-item{
+                all: unset;
+                margin: 0px 12px;
+                color: #fa0000;
+            }
+        }
+    }
+    .cart-summary{
+        width: 100%;
+        margin-bottom: 50px;
+        color: #ffffff;
+        tr{
+            td:nth-child(2){
+                text-align: right;
+            }
+        }
     }
 }

@@ -30,7 +30,12 @@ const getAllproductsInCart = async (req, res) => {
                 $unset: ['product', 'productId']
             }
         ]);
-        res.json({success: true, data: cartData, error: null});
+        const result = {items: cartData, count: 0, total: 0};
+        cartData.forEach(item => {
+            result.count+=item.quantity;
+            result.total+=(item.quantity * item.price);
+        });
+        res.json({success: true, data: result, error: null});
     }
     catch(e){
         console.error(e);
@@ -70,13 +75,15 @@ const deleteProductFromCart = async (req, res) => {
         if(!productId){
             throw new Error("productId is required");
         }
-        const newCart = new Cart({productId, quantity});
-        console.log(newCart);
-        await newCart.save();
+        const data = await Cart.findOneAndDelete({productId});
+        if(!data){
+            throw new Error('Error deleting cart item');
+        }
+        res.json({success: true, data: {}, error: null});
     }
     catch(e){
         console.error(e);
-        res.json({success: false});
+        res.json({success: false, data: null, error: e.message});
     }
 };
 
