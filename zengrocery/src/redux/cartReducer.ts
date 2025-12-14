@@ -83,9 +83,6 @@ const cartReducer = createSlice({
             state.status = 'failed';
             state.items = [];
         })
-        .addCase(saveToCart.pending, (state) => {
-            state.status = 'loading';
-        })
         .addCase(saveToCart.fulfilled, (state) => {
             state.status = 'success';
         })
