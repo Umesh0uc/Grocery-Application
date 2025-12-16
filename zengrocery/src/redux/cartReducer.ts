@@ -3,6 +3,7 @@ import type { Product } from "../utils/commonTypes";
 import axios from "axios";
 import { endpoints } from "../utils/utils";
 import type { AppDispatch } from "./store";
+import { toast } from "./toastReducer";
 
 export type CartState = {
     items: Product[],
@@ -32,8 +33,11 @@ export const fetchCartItems = createAsyncThunk<{items: Product[], count: number,
 export const saveToCart = createAsyncThunk<Product, {_id:string, quantity: number, dispatch: AppDispatch}>('cart/saveToCart', async ({_id,quantity,dispatch}, {rejectWithValue}) => {
     try{
         const { data } = await axios.post(endpoints.cartService, {_id, quantity});
-        if(data.data._id && data.success){
+        if(data?.data?._id && data?.success){
             dispatch(fetchCartItems());
+        }
+        else if(!data?.success && data?.error === 'LIMIT_REACHED'){
+            dispatch(toast('Cart Limit has Reached.'));
         }
         return data;
     }

@@ -6,3 +6,23 @@
     z-index: 1;
     width: 100%;
 }
+
+.badge-container {
+  position: relative;
+  display: inline-block;
+}
+
+.notification-badge {
+  background-color: #ff4d4f; /* Vibrant red */
+  color: white;
+  font-size: 11px;
+  font-weight: 700;
+  border-radius: 50%;
+  box-shadow: 0 2px 4px rgba(167, 9, 9, 0.699);
+  min-width: 18px;
+  height: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+

@@ -46,6 +46,8 @@
             border: 1px solid #3a3838;
             td, th{
                 padding: 5px;
+                border: 1px solid grey;
+                text-align: center;
             }
             .delete-cart-item{
                 all: unset;
