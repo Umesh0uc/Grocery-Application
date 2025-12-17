@@ -26,11 +26,27 @@ function Header(){
                 </button>
                 <div className="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
                     <div className="navbar-nav">
-                        <button className={`nav-link ${page === "home" && "active"}`} value={"home"} onClick={handleClick}>Home</button>
-                        <button className={`nav-link ${page === "cart" && "active"}`} value={"cart"} onClick={handleClick}>Cart </button>
-                        {count > 0 && <div className="badge-container">
-                            <span className="notification-badge">{count}</span>
-                        </div>}
+                        <button 
+                            className={`nav-link ${page === "home" && "active"}`} 
+                            value={"home"} 
+                            data-bs-toggle="collapse" 
+                            data-bs-target="#navbarNavAltMarkup" 
+                            onClick={handleClick}
+                        >Home</button>
+                        <button 
+                            className={`nav-link ${page === "cart" && "active"}`} 
+                            value={"cart"} 
+                            data-bs-toggle="collapse" 
+                            data-bs-target="#navbarNavAltMarkup" 
+                            onClick={handleClick}
+                        >
+                            Cart
+                            <sup>
+                                {count > 0 && <div className="badge-container">
+                                    <span className="notification-badge">{count}</span>
+                                </div>}
+                            </sup>
+                        </button>
 
                     </div>
                 </div>

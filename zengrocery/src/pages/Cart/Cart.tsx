@@ -53,7 +53,7 @@ function Cart(){
                 {items.map((item, index) => {
                     return (
                         <tr key={index}>
-                            <td><strong>{item.name}</strong></td>
+                            <td style={{textAlign: 'left'}} ><img src={item.imageUrl} width={'50px'} style={{marginRight: '10px'}} alt={''}/><strong>{item.name}</strong></td>
                             <td>₹ {item.price}</td>
                             <td>
                                 <div className="btn-group" role="group" aria-label="Basic example">
@@ -84,7 +84,7 @@ function Cart(){
                 </tr>
                 <tr>
                 <td>
-                    <button className="btn btn-success">Checkout</button>
+                    <button className="btn btn-success checkout-btn">Checkout</button>
                 </td>
                 </tr>
             </tbody>
