@@ -1,0 +1,50 @@
+services:
+  product-service:
+    build: ./product
+    image: product-service
+    pull_policy: never
+    container_name: product-service
+    networks:
+      - backend
+    env_file:
+      - ./product/.env
+    ports:
+      - 5001:5001
+  cart-service:
+    build: ./cart
+    image: cart-service
+    pull_policy: never
+    container_name: cart-service
+    networks:
+      - backend
+    env_file:
+      - ./cart/.env
+    ports:
+      - 5003:5003
+  api-gateway:
+    depends_on:
+      - product-service
+      - cart-service
+    build: ./api-gateway
+    image: api-gateway
+    pull_policy: never
+    container_name: api-gateway
+    networks:
+      - backend
+    env_file:
+      - ./api-gateway/.env
+    ports:
+      - 5000:5000
+  frontend:
+    env_file:
+      - ./zengrocery/.env
+    build: ./zengrocery
+    image: zengrocery
+    pull_policy: never
+    container_name: zengrocery
+    ports:
+      - 3000:3000
+
+networks:
+  backend:
+    driver: bridge

@@ -21,6 +21,7 @@ const addProductInCart = async (req, res) => {
         return res.json({success: true, data: result, error: null});
     }
     catch(e){
+        console.log(e);
         res.json({success: false, data: null, error: e.message});
     }
 };

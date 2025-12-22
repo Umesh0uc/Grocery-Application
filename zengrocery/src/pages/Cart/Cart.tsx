@@ -19,7 +19,7 @@ function Cart(){
         dispatch(deleteFromCart({_id: item._id, index, dispatch}));
     };
 
-    const handleQuantityChange = (item: Product, index: number, flag: boolean) => {
+    const handleQuantityChange = (item: Product, flag: boolean) => {
         if(!flag && count < 1){
             return;
         }
@@ -57,9 +57,9 @@ function Cart(){
                             <td>₹ {item.price}</td>
                             <td>
                                 <div className="btn-group" role="group" aria-label="Basic example">
-                                <button type="button" className="btn btn-light" onClick={() => {handleQuantityChange(item, index, false)}}>-</button>
+                                <button type="button" className="btn btn-light" onClick={() => {handleQuantityChange(item, false)}}>-</button>
                                 <span className="m-2">{item.quantity}</span>
-                                <button type="button" className="btn btn-light" onClick={() => {handleQuantityChange(item, index, true)}}>+</button>
+                                <button type="button" className="btn btn-light" onClick={() => {handleQuantityChange(item, true)}}>+</button>
                                 </div>
                             </td>
                             <td>₹ {item.quantity * item.price}</td>

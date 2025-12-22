@@ -22,7 +22,7 @@ function Layout(){
                 <Cart/>
             </div>
             <div className='toast-container'>
-                <ToastNotification show={show} message={message} setShow={(message) => {message ? dispatch(toast(message)) : dispatch(destroyToast(''));}}  />
+                <ToastNotification show={show} message={message} setShow={(message) => {message ? dispatch(toast(message)) : dispatch(destroyToast());}}  />
             </div>
         </div>
     );

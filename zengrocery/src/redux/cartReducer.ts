@@ -68,9 +68,6 @@ const cartReducer = createSlice({
     name: "cart",
     initialState: initState,
     reducers: {
-        addToCart: (state, action) => {
-            
-        }
     },
     extraReducers(builder) {
         builder
@@ -108,5 +105,4 @@ const cartReducer = createSlice({
     }
 });
 
-export const { addToCart } = cartReducer.actions;
 export default cartReducer.reducer;

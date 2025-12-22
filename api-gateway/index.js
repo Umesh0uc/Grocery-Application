@@ -12,7 +12,7 @@ const cartServiceUrl = process.env.CART_SERVICE_URL;
 app.use(morgan('combined'));
 
 const corsOptions = {
-    origin: ['http://localhost:5173'],
+    origin: ['http://localhost:3000'],
 };
 app.use(cors(corsOptions));
 

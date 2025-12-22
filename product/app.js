@@ -4,7 +4,7 @@ const mongoUrl = process.env.MONGO_URL;
 
 const mongoose = require('mongoose');
 const express = require("express");
-const router = require("./routes");
+const router = require("./src/routes");
 const morgan = require("morgan");
 
 const app = express();

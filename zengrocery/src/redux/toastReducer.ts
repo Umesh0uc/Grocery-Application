@@ -18,7 +18,7 @@ const toastSlice = createSlice({
             state.show = true;
             state.message = action.payload;
         },
-        destroyToast: (state, action) => {
+        destroyToast: (state) => {
             state.show = false;
             state.message = '';
         }
