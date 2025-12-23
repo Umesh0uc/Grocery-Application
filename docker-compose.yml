@@ -37,11 +37,11 @@ services:
       - 5000:5000
   frontend:
     env_file:
-      - ./zengrocery/.env
-    build: ./zengrocery
-    image: zengrocery
+      - ./mygrocery/.env
+    build: ./mygrocery
+    image: mygrocery
     pull_policy: never
-    container_name: zengrocery
+    container_name: mygrocery
     ports:
       - 3000:3000
 
