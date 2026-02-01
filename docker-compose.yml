@@ -4,6 +4,10 @@ services:
     image: product-service
     pull_policy: never
     container_name: product-service
+    volumes:
+      - type: bind
+        source: ./product/logs
+        target: /app/logs
     networks:
       - backend
     env_file:
@@ -15,6 +19,10 @@ services:
     image: cart-service
     pull_policy: never
     container_name: cart-service
+    volumes:
+      - type: bind
+        source: ./cart/logs
+        target: /app/logs
     networks:
       - backend
     env_file:
@@ -29,6 +37,10 @@ services:
     image: api-gateway
     pull_policy: never
     container_name: api-gateway
+    volumes:
+      - type: bind
+        source: ./api-gateway/logs
+        target: /app/logs
     networks:
       - backend
     env_file:

@@ -1,5 +1,7 @@
+
 const Product = require("../models/Product");
 const { createJsonResponse } = require("../utils/responseUtils");
+const { logToFile } = require("../utils/logger");
 
 const getAllProducts = async (req, res) => {
     try{
@@ -7,7 +9,7 @@ const getAllProducts = async (req, res) => {
         res.json(createJsonResponse(true, products));
     }
     catch(e){
-        console.error(e?.message);
+        logToFile(`getAllProducts error: ${e?.message}`);
         res.json(createJsonResponse(false, null, e?.message));
     }
 };
@@ -21,7 +23,7 @@ const addProduct = async (req, res) => {
         res.json(data);
     }
     catch(e){
-        console.log(e.message);
+        logToFile(`addProduct error: ${e?.message}`);
         res.send("server error");
     }
 };
@@ -30,11 +32,11 @@ const productExists = async (req, res) => {
     try{
         const { _id } = req.params;
         const productExists = await Product.exists({_id});
-        console.log(productExists);
+        logToFile(`productExists: ${JSON.stringify(productExists)}`);
         res.json(productExists);
     }
     catch(e){
-        console.log(e.message);
+        logToFile(`productExists error: ${e?.message}`);
         res.send("server error");
     }
 };

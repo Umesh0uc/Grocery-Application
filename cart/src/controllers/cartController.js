@@ -2,6 +2,7 @@ const Cart = require("../models/Cart");
 const axios = require("axios");
 const { getCount } = require("../utils/cartUtils");
 const { deleteItemFromCart, getProducts, addProduct } = require("../services/cartService");
+const { logToFile } = require("../utils/logger");
 
 const getAllproductsInCart = async (req, res) => {
     try{
@@ -9,7 +10,7 @@ const getAllproductsInCart = async (req, res) => {
         res.json({success: true, data: result, error: null});
     }
     catch(e){
-        console.error(e);
+        logToFile(`getAllproductsInCart error: ${e?.message}`);
         res.json({success: false, data: null, error: e.message});
     }
 };
@@ -21,7 +22,7 @@ const addProductInCart = async (req, res) => {
         return res.json({success: true, data: result, error: null});
     }
     catch(e){
-        console.log(e);
+        logToFile(`addProductInCart error: ${e?.message}`);
         res.json({success: false, data: null, error: e.message});
     }
 };
@@ -39,7 +40,7 @@ const deleteProductFromCart = async (req, res) => {
         res.json({success: true, data: {}, error: null});
     }
     catch(e){
-        console.error(e);
+        logToFile(`deleteProductFromCart error: ${e?.message}`);
         res.json({success: false, data: null, error: e.message});
     }
 };
