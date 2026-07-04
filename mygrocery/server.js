@@ -5,10 +5,10 @@ const app = express();
 // Use port 3000 by default, or whatever the environment variable specifies
 const PORT = process.env.PORT || 3000;
 
-// The path to your compiled Vite files (the dist folder)
-const DIST_DIR = path.join(__dirname, 'dist');
+// The path to your compiled Vite files (the build folder)
+const DIST_DIR = path.join(__dirname, 'build');
 
-// 1. Serve static files (HTML, CSS, JS, images) from the dist directory
+// 1. Serve static files (HTML, CSS, JS, images) from the build directory
 app.use(express.static(DIST_DIR));
 
 // 2. Catch-all route for Single Page Applications (SPA)
