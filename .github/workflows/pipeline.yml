@@ -33,6 +33,7 @@ jobs:
                     key: ${{ secrets.EC2_SSH_KEY }}
                     source: "./mygrocery/dist,./mygrocery/server.js"
                     target: "/home/ec2-user/my-vite-app"
+                    strip_components: 1
 
             -   name: Start/Restart Node Server
                 uses: appleboy/ssh-action@v1.0.3
