@@ -31,7 +31,7 @@ jobs:
           host: ${{ secrets.EC2_HOST }}
           username: ${{ secrets.EC2_USERNAME }}
           key: ${{ secrets.EC2_SSH_KEY }}
-          source: "mygrocery/dist,mygrocery/server.js"
+          source: "mygrocery/build,mygrocery/server.js"
           target: "/home/ec2-user/my-vite-app"
           strip_components: 1
 
