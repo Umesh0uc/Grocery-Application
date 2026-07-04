@@ -17,10 +17,8 @@ jobs:
                 with:
                     node-version: '20'
 
-            -   name: Navigate to Folder
-                run: cd ./mygrocery
-
             -   name: Install dependencies
+                working-directory: ./mygrocery
                 run: npm install
 
             -   name: Build
